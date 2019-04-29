@@ -14,7 +14,6 @@ public class RunApplication
     static MenuPanel menuPanel;
     static JPanel contentPanel;
     static CardLayout cardLayout;
-    static MenuTextPanel menuTextPanel;
     static DocumentPanel documentPanel;
 
 
@@ -25,15 +24,13 @@ public class RunApplication
         frame = new Frame();
         cardLayout = new CardLayout();
         menuPanel = new MenuPanel();
-        menuTextPanel = new MenuTextPanel();
         contentPanel = new JPanel();
         documentPanel = new DocumentPanel();
 
 
         contentPanel.setLayout(cardLayout);
         contentPanel.add(menuPanel, "1");
-        contentPanel.add(menuTextPanel, "2");
-        contentPanel.add(documentPanel, "3");
+        contentPanel.add(documentPanel, "2");
 
         cardLayout.show(contentPanel, "1");
 
@@ -42,7 +39,7 @@ public class RunApplication
         menuPanel.createNewButton.addActionListener(new ClearAndFill());
 
         documentPanel = new DocumentPanel();
-        contentPanel.add(documentPanel, "4");
+        contentPanel.add(documentPanel, "3");
         documentPanel.comboBoxFonts.addActionListener(new ChangeFont());
 
 
