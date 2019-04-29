@@ -9,6 +9,9 @@ import java.awt.event.*;
 public class MenuPanel extends JPanel
 {
     public static JButton createNewButton;
+    public static JButton myFilesButton;
+    public static JButton quitButton;
+    public static JPanel buttonPanel;
 
 
 
@@ -17,41 +20,38 @@ public class MenuPanel extends JPanel
     {
 
         //Layout
-        setLayout(null);
-
-
-        //Buttons: Local styling variables
-        int buttonWidth = 300;
-        int buttonHeight = 100;
-        int buttonXPos = Frame.width/2 - buttonWidth/2;
-        int buttonYPos = Frame.height/2;
 
 
         //Button "Create new": Styling & Functionality
         createNewButton = new JButton("Create new");
         createNewButton.setBackground(Color.ORANGE);
         createNewButton.setBorder(new RoundedBorder(20));
-        createNewButton.setBounds(buttonXPos, buttonYPos - buttonHeight, buttonWidth, buttonHeight);
-
+        createNewButton.setPreferredSize(new Dimension(600, 200));
 
         //Button "My Files": Styling & Functionality
-        JButton myFilesButton = new JButton("My Files");
+        myFilesButton = new JButton("My Files");
         myFilesButton.setBackground(Color.ORANGE);
         myFilesButton.setBorder(new RoundedBorder(20));
-        myFilesButton.setBounds(buttonXPos, buttonYPos + 20, buttonWidth, buttonHeight);
+        myFilesButton.setPreferredSize(new Dimension(600, 200));
 
         //Button "Quit": Styling & Functionality
-        JButton quitButton = new JButton("Quit");
+        quitButton = new JButton("Quit");
         quitButton.setBackground(Color.ORANGE);
         quitButton.setBorder(new RoundedBorder(20));
-        quitButton.setBounds(buttonXPos, buttonYPos + buttonHeight + 40, buttonWidth, buttonHeight);
         quitButton.addActionListener(e -> System.exit(0)); //using new lambda expression
+        quitButton.setPreferredSize(new Dimension(600, 200));
+
+        //ButtonPanel
+        buttonPanel = new JPanel();
+        buttonPanel.setLayout(new GridLayout(3, 1, 0, 20));
+        buttonPanel.add(createNewButton);
+        buttonPanel.add(myFilesButton);
+        buttonPanel.add(quitButton);
 
 
-        //Adding to menu panel
-        add(createNewButton);
-        add(myFilesButton);
-        add(quitButton);
+        //Adding panels
+        add(buttonPanel);
+
 
 
     }
