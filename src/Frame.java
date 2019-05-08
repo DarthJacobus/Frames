@@ -9,7 +9,7 @@ import java.awt.*;
 public class Frame extends JFrame
 {
 
-    static final int width = 1400;
+    static final int width = 1200;
     static final int height = 800;
     public static Container contentPane;
 

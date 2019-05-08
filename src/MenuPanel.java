@@ -2,14 +2,16 @@
 
 import javax.swing.*;
 import javax.swing.border.Border;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 
 
 public class MenuPanel extends JPanel
 {
-    public static JButton createNewButton;
-    public static JButton myFilesButton;
+    public static JButton createDocumentButton;
+    public static JButton createDrawingButton;
     public static JButton quitButton;
     public static JPanel buttonPanel;
 
@@ -20,68 +22,44 @@ public class MenuPanel extends JPanel
     {
 
         //Layout
+        setLayout(new BorderLayout());
 
 
-        //Button "Create new": Styling & Functionality
-        createNewButton = new JButton("Create new");
-        createNewButton.setBackground(Color.ORANGE);
-        createNewButton.setBorder(new RoundedBorder(20));
-        createNewButton.setPreferredSize(new Dimension(600, 200));
 
-        //Button "My Files": Styling & Functionality
-        myFilesButton = new JButton("My Files");
-        myFilesButton.setBackground(Color.ORANGE);
-        myFilesButton.setBorder(new RoundedBorder(20));
-        myFilesButton.setPreferredSize(new Dimension(600, 200));
-
-        //Button "Quit": Styling & Functionality
+        //Buttons: Creation
+        createDocumentButton = new JButton("New Document");
+        createDocumentButton.setBackground(Color.BLUE);
+        createDrawingButton = new JButton("New Drawing");
+        createDrawingButton.setBackground(Color.CYAN);
         quitButton = new JButton("Quit");
-        quitButton.setBackground(Color.ORANGE);
-        quitButton.setBorder(new RoundedBorder(20));
-        quitButton.addActionListener(e -> System.exit(0)); //using new lambda expression
-        quitButton.setPreferredSize(new Dimension(600, 200));
-
-        //ButtonPanel
-        buttonPanel = new JPanel();
-        buttonPanel.setLayout(new GridLayout(3, 1, 0, 20));
-        buttonPanel.add(createNewButton);
-        buttonPanel.add(myFilesButton);
-        buttonPanel.add(quitButton);
+        quitButton.setBackground(Color.PINK);
 
 
-        //Adding panels
-        add(buttonPanel);
+        //Buttons: Loop that styles the buttons
+        JButton[] stylingList = new JButton[] {createDocumentButton, createDrawingButton, quitButton};
+        for(JButton element : stylingList) {
+            element.setPreferredSize(new Dimension(Frame.width/3, Frame.height));
+            element.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 25));
+            element.setForeground(Color.WHITE);
+            element.setBorder(new LineBorder(Color.gray, 4));
+        }
+
+
+        //Buttons: Action Listeners using lambda expression
+        createDocumentButton.addActionListener(e -> RunApplication.cardLayout.show(RunApplication.contentPanel, "documentPanel"));
+        createDrawingButton.addActionListener(e -> RunApplication.cardLayout.show(RunApplication.contentPanel, "drawingPanel"));
+        quitButton.addActionListener(e -> System.exit(0));
+
+
+        //ButtonPanel: Creation, layout and adding sub panels
+        add(createDocumentButton, BorderLayout.WEST);
+        add(createDrawingButton, BorderLayout.CENTER);
+        add(quitButton, BorderLayout.EAST);
 
 
 
     }
 
-
-    private static class RoundedBorder implements Border
-    {
-
-        private int radius;
-
-
-        RoundedBorder(int radius) {
-            this.radius = radius;
-        }
-
-
-        public Insets getBorderInsets(Component c) {
-            return new Insets(this.radius+1, this.radius+1, this.radius+2, this.radius);
-        }
-
-
-        public boolean isBorderOpaque() {
-            return true;
-        }
-
-
-        public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
-            g.drawRoundRect(x, y, width-1, height-1, radius, radius);
-        }
-    }
 
 
 

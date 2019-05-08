@@ -15,6 +15,7 @@ public class RunApplication
     static JPanel contentPanel;
     static CardLayout cardLayout;
     static DocumentPanel documentPanel;
+    static DrawingPanel drawingPanel;
 
 
 
@@ -26,22 +27,18 @@ public class RunApplication
         menuPanel = new MenuPanel();
         contentPanel = new JPanel();
         documentPanel = new DocumentPanel();
+        drawingPanel = new DrawingPanel();
+
 
 
         contentPanel.setLayout(cardLayout);
-        contentPanel.add(menuPanel, "1");
-        contentPanel.add(documentPanel, "2");
+        contentPanel.add(menuPanel, "menuPanel");
+        contentPanel.add(documentPanel, "documentPanel");
+        contentPanel.add(drawingPanel, "drawingPanel");
 
         cardLayout.show(contentPanel, "1");
 
         frame.contentPane.add(contentPanel);
-
-        menuPanel.createNewButton.addActionListener(new ClearAndFill());
-
-        documentPanel = new DocumentPanel();
-        contentPanel.add(documentPanel, "3");
-        documentPanel.comboBoxFonts.addActionListener(new ChangeFont());
-
 
 
 
@@ -52,35 +49,6 @@ public class RunApplication
 
     }
 
-
-    static class ClearAndFill implements ActionListener
-    {
-
-        public void actionPerformed(ActionEvent e)
-        {
-            cardLayout.show(contentPanel, "3");
-            frame.setTitle("iWrite TextEditor - New Text Document");
-
-
-
-
-
-        }
-    }
-
-    static class ChangeFont implements ActionListener
-    {
-        public void actionPerformed(ActionEvent e)
-        {
-            documentPanel.comboBoxFonts = (JComboBox) e.getSource();
-            String command = e.getActionCommand();
-            if("SansSerif".equals(command)) {
-                documentPanel.textArea.setText("FUCK OFF");
-            }
-
-        }
-
-    }
 
 
 
